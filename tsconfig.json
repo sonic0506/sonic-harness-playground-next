@@ -1,4 +1,5 @@
 {
+  "extends": "./.sonic-harness/tsconfig.strict.json",
   "compilerOptions": {
     "target": "ES2017",
     "lib": ["dom", "dom.iterable", "esnext"],
@@ -30,5 +31,5 @@
     ".next/dev/types/**/*.ts",
     "**/*.mts"
   ],
-  "exclude": ["node_modules"]
+  "exclude": [".next/dev", "node_modules"]
 }
