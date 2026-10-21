@@ -1,3 +1,10 @@
+import Link from 'next/link';
+
 export function HomePage() {
-  return <main>시작</main>;
+  return (
+    <main>
+      <h1>시작</h1>
+      <Link href="/users">사용자 목록</Link>
+    </main>
+  );
 }
