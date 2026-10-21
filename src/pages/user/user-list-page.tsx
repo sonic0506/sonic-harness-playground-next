@@ -1,4 +1,4 @@
-import { dehydrate, HydrationBoundary } from '@tanstack/react-query';
+import { dehydrate, HydrationBoundary, noop } from '@tanstack/react-query';
 import type { SearchParams } from 'nuqs/server';
 import { Suspense } from 'react';
 
@@ -16,7 +16,8 @@ type UserListPageProps = {
 async function UserListPrefetch({ searchParams }: UserListPageProps) {
   const { page, q } = await loadUserListSearchParams(searchParams);
   const queryClient = getQueryClient();
-  await queryClient.prefetchQuery(userQueries.list({ page, q }));
+  // 실패해도 화면은 그려요. 에러는 클라이언트의 ErrorBoundary가 받아요
+  await queryClient.query(userQueries.list({ page, q })).catch(noop);
   return (
     <HydrationBoundary state={dehydrate(queryClient)}>
       <UserListSection />
